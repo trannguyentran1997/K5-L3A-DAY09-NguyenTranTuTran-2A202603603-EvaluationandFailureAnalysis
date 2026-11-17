@@ -11,21 +11,61 @@ File này là hướng dẫn riêng của nhóm, đi từng bước theo đề (
 | # | Bước | Trạng thái |
 |---|---|---|
 | M0 | Cài đặt, `lab9.smoke` = M0 PASS, `evalset --build` | xong |
-| 1 | Commit code Lab 8 vào `src/` | xong (`73f879e`) |
+| 1 | Commit code Lab 8 vào `src/` | xong (`c18b178`) |
 | 2 | Đọc trace C-002, C-007, C-013, C-014, swarm C-002@55 | xong (kết quả ở mục "Kết quả chạy thử") |
 | 3 | `docs/failure_taxonomy.md` | xong |
 | 4 | M1: `src/lab9/evalset.py`: gắn `FAILURE_MODES` | xong: `--build --check` = 0 problem, eval set sha `27910804735d` |
 | 5 | `docs/trace_case.md` + `src/tests/test_lab9_trace_case_c002.py` | xong: case C-002@11, regression test 2 passed |
-| E | Commit M1 + M2 | xong (`269cf3e`) |
+| E | Commit M1 + M2 | xong (`da47f05`) |
 | 6 | M2: `src/lab9/stats.py` | xong: 4 hàm M2 (4/6 test `lab9_stats` xanh; 2 test bootstrap chờ M4) |
 | 7 | M2: `docs/judge_audit.md` | xong: tone dùng (κ 0.757), helpful loại (R 0.3), 10 ca audit |
-| 8–9 | M3: `src/lab9/graders.py` + `src/config/metric_spec.yaml` | xong, **chưa commit**: 4 grader + 2 metric; detection 100%, báo nhầm 0%; 11/13 test core xanh (2 bootstrap chờ M4) |
+| 8–9 | M3: `src/lab9/graders.py` + `src/config/metric_spec.yaml` | xong (`d969027`): 4 grader + 2 metric; detection 100%, báo nhầm 0%; 11/13 test core xanh (2 bootstrap chờ M4) |
 | **10** | **M4: `paired_bootstrap` trong `src/lab9/stats.py`** | **← LÀM TIẾP Ở ĐÂY** |
 | 11–13 | M4: baseline, harness map, PR | chưa |
 | 14 | Eval card + PRD | chưa |
 | 15–17 | M5–M7 | chưa |
 
 Làm tiếp theo mục **"Hướng dẫn chi tiết 5 việc tiếp theo (A → E)"** ngay bên dưới. Code cho từng bước nằm ở mục **"Code mẫu từng M (đã chạy thử)"**.
+
+---
+
+## Commit đúng tài khoản GitHub (`trannguyentran1997`)
+
+Repo: <https://github.com/trannguyentran1997/K5-L3A-DAY09-NguyenTranTuTran-2A202603603-EvaluationandFailureAnalysis>
+
+Tài khoản GitHub `trannguyentran1997` dùng email **`otis7797@gmail.com`**. GitHub gắn commit về tài khoản **theo email**; tên tác giả chỉ để hiển thị.
+
+**Cấu hình một lần cho riêng repo Lab 9** (đứng ở thư mục gốc repo; `--local` chỉ áp dụng trong repo này, không đổi repo khác):
+
+```powershell
+git config --local user.name "Nguyễn Trần Tú Trân"
+git config --local user.email "otis7797@gmail.com"
+git config user.email     # kiểm tra: phải ra otis7797@gmail.com
+```
+
+Đã cấu hình xong ngày 17/11/2026.
+
+**Kiểm tra sau mỗi commit:**
+
+```powershell
+git log --format="%h %an <%ae> | %s" -3
+```
+
+Email tác giả phải là `otis7797@gmail.com`. Sau khi push, trên GitHub mỗi commit phải hiện avatar và tên `trannguyentran1997`.
+
+**Nếu lỡ commit bằng email khác và CHƯA push:** sửa tác giả cho mọi commit sau mốc `<hash-cuối-cùng-đúng>`:
+
+```powershell
+git rebase <hash-cuối-cùng-đúng> --exec "git commit --amend --no-edit --reset-author"
+```
+
+Repo này đã làm đúng thao tác đó với mốc `d1b9471` (commit cuối của starter). 3 commit của nhóm hiện là `c18b178`, `da47f05`, `d969027`, cả 3 đều mang email `otis7797@gmail.com`. **Đã push rồi thì không làm cách này**, vì phải force-push, sẽ ghi đè lịch sử trên GitHub.
+
+**Khi push:** máy đang lưu đăng nhập GitHub `trannguyentran1997` (Git Credential Manager), nên `git push` đi đúng tài khoản. Lần push đầu của nhánh:
+
+```powershell
+git push -u origin starter/d09
+```
 
 ---
 
