@@ -2,8 +2,8 @@
 
 Card này đi kèm mỗi báo cáo và được dùng lại ở Day 10. Mọi con số dưới đây chép từ report do `python -m lab9.eval` sinh ra (không sửa tay), dẫn theo run ID.
 
-- **Run ID / eval set SHA:** baseline `E-swarm-20261118-2791` · eval set v1 sha `27910804735d`
-- **Phiên bản:** code nhánh `starter/d09` (PR vào `main`) · eval set v1 (sha `27910804735d`) · `metric_spec_version` 1.0 · grader `src/lab9/graders.py` (M3, commit `d969027`) · seeds 11/22/33/44/55 · LLM: MockLLM · Python 3.13.1
+- **Run ID / eval set SHA:** baseline `E-swarm-20261118-685e` · eval set v1 sha `685e281c2730`
+- **Phiên bản:** code nhánh `starter/d09` (PR vào `main`) · eval set v1 (sha `685e281c2730`) · `metric_spec_version` 1.0 · grader `src/lab9/graders.py` (M3, commit `d969027`) · seeds 11/22/33/44/55 · LLM: MockLLM · Python 3.13.1
 - **Eval set:** v1, 14 item × 5 seed = 70 trial, nguồn `lab8_public` (ma trận claim của Lab 8); nhãn tách riêng ở `data/eval/labels_v1.json`; mỗi item có `failure_modes` (FM-01…FM-09) và `provenance`. `python -m lab9.evalset --check` → 0 problem.
 
 ## Metric & ngưỡng (trích `src/config/metric_spec.yaml`)
@@ -24,7 +24,7 @@ Card này đi kèm mỗi báo cáo và được dùng lại ở Day 10. Mọi co
 
 ## Kết quả baseline vs PR (eval set v1)
 
-| Metric | baseline swarm `E-swarm-20261118-2791` | fixed `E-fixed-20261118-2791` | seeded_regression `E-seeded_regression-20261118-2791` |
+| Metric | baseline swarm `E-swarm-20261118-685e` | fixed `E-fixed-20261118-685e` | seeded_regression `E-seeded_regression-20261118-685e` |
 |---|---|---|---|
 | approval_bypass | 0 | 0 | 0 |
 | secret_leak | 0 | 0 | 0 |
@@ -73,7 +73,7 @@ Khi thêm hoặc bớt item (ví dụ thêm item từ trace case mới), đổi 
 
 ## v2 (Advanced / Expert): eval set v2 + slice gate + chống gian lận
 
-- **Run ID / SHA:** baseline `E-swarm-20261118-f500` · eval set v2 sha `f500ad9a4773` · `metric_spec_version` 2.0
+- **Run ID / SHA:** baseline `E-swarm-20261118-7510` · eval set v2 sha `75103cb93d69` · `metric_spec_version` 2.0
 - **Eval set v2:** 28 item = 14 item v1 + 14 item tấn công của giảng viên (split `adversarial`). `config/fm_map.yaml` ánh xạ cơ chế tấn công sang mã FM: ticket_over_db→FM-03, stale_policy→FM-06, clause_sum→FM-04, double_deduct→FM-05, sibling_refund→FM-07, denied_ignored→FM-02, reply_ledger_mismatch→FM-08, cross_principal→FM-09. `evalset --v2` → 0 problem, mỗi FM bị tấn công có ≥ 3 item.
 - **Baseline v2:** pass_rate 0.9786 · refund_amount_correct 0.9786 · reply_matches_ledger 1.0 · pass@1 0.9786 · pass@5 1.0 · pass^3 0.9357 · **pass^5 0.8929**.
 
@@ -94,7 +94,7 @@ Với LLM thật phải đo dải nhiễu A/A trước, rồi đặt sàn ngoài
 | fixed | merge | — |
 | honest_refactor | merge | — |
 | seeded_regression | block | refund_amount_correct, pass_rate, pass_hat_5, reply_matches_ledger, 3 slice |
-| slice_regression `E-slice_regression-20261118-f500` | block | **chỉ** `slice:money_movement/pass_rate` = 0.85 (n=12, Δ −0.150, CI [−0.300, +0.000]), dưới sàn 0.90. Trung bình chung 0.9357 (Δ −0.043, CI [−0.121, +0.029]) vẫn qua |
+| slice_regression `E-slice_regression-20261118-7510` | block | **chỉ** `slice:money_movement/pass_rate` = 0.85 (n=12, Δ −0.150, CI [−0.300, +0.000]), dưới sàn 0.90. Trung bình chung 0.9357 (Δ −0.043, CI [−0.121, +0.029]) vẫn qua |
 | flaky_regression | block | pass_rate (Δ −0.064, CI [−0.114, −0.014]), **pass_hat_5 0.5714**, slice money_movement (Δ −0.133, CI [−0.183, −0.083]) |
 
 Mutation scorecard: **3/3** regression bị chặn, **0** báo nhầm. Baseline so với chính nó: exit 0.

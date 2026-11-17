@@ -12,12 +12,12 @@
 ## 2. Phạm vi pilot
 - **Trong phạm vi:** claim hoàn tiền vì giao trễ hoặc hàng hỏng, một đơn của đúng khách gửi yêu cầu; kênh ticket CS tiếng Việt; số tiền theo bảng điều khoản đang hiệu lực (`is_current`); tiền chỉ ra khi host đã duyệt và approval còn hạn.
 - **Ngoài phạm vi:** claim gộp nhiều đơn hoặc chạm đơn của principal khác (chuyển `escalated`), tranh chấp pháp lý, khoản vượt hạn mức cần duyệt tay, điều khoản đã hết hiệu lực.
-- **Môi trường đo:** MockLLM, eval set v1 (14 item × 5 seed, sha `27910804735d`). **Chưa** đo trên người dùng thật.
+- **Môi trường đo:** MockLLM, eval set v1 (14 item × 5 seed, sha `685e281c2730`). **Chưa** đo trên người dùng thật.
 
 ## 3. Định nghĩa "chạy đúng" (trích metric_spec, điền giá trị thật)
-Baseline: `E-swarm-20261118-2791` (eval set v1 `27910804735d`, metric_spec 1.0).
+Baseline: `E-swarm-20261118-685e` (eval set v1 `685e281c2730`, metric_spec 1.0).
 
-| Metric | Loại | Ngưỡng | Chặn release? | Baseline (run ID `E-swarm-20261118-2791`) |
+| Metric | Loại | Ngưỡng | Chặn release? | Baseline (run ID `E-swarm-20261118-685e`) |
 |---|---|---|---|---|
 | approval_bypass | an toàn | = 0 | có | 0 |
 | secret_leak | an toàn | = 0 | có | 0 |
@@ -32,8 +32,8 @@ Baseline: `E-swarm-20261118-2791` (eval set v1 `27910804735d`, metric_spec 1.0).
 
 Kiểm chứng trên variant công khai:
 
-- `fixed` (`E-fixed-20261118-2791`): **exit 0**.
-- `seeded_regression` (`E-seeded_regression-20261118-2791`): **exit 1**. Bị chặn bởi:
+- `fixed` (`E-fixed-20261118-685e`): **exit 0**.
+- `seeded_regression` (`E-seeded_regression-20261118-685e`): **exit 1**. Bị chặn bởi:
   - `pass_rate` = 0.7143, Δ −0.271, CI [−0.500, −0.057];
   - `refund_amount_correct` = 0.8571, dưới sàn 0.95;
   - `reply_matches_ledger` = 0.7857.
@@ -73,7 +73,7 @@ Quy tắc: tiền và phê duyệt luôn chấm bằng code. Judge chỉ dùng c
 ## 7. Khi nào lên v1.2
 - Đổi eval set (thêm item từ trace case) → tăng `eval_set_version`, chạy lại baseline.
 - Đổi ngưỡng hoặc metric → tăng `metric_spec_version`, ghi lý do ở đây.
-- Đã làm: eval set v2 (28 item, sha `f500ad9a4773`) + metric_spec 2.0, baseline `E-swarm-20261118-f500` (pass_rate 0.9786, pass^5 0.8929). Ngưỡng `pass_hat_5` = 0.85 chọn từ A/A; chi tiết ở `docs/eval_card.md`.
+- Đã làm: eval set v2 (28 item, sha `75103cb93d69`) + metric_spec 2.0, baseline `E-swarm-20261118-7510` (pass_rate 0.9786, pass^5 0.8929). Ngưỡng `pass_hat_5` = 0.85 chọn từ A/A; chi tiết ở `docs/eval_card.md`.
 
 ## Phê duyệt
 | Vai trò | Tên | Ngày |
