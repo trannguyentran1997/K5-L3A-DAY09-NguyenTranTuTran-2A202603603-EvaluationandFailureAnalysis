@@ -13,14 +13,15 @@ File này là hướng dẫn riêng của nhóm, đi từng bước theo đề (
 | M0 | Cài đặt, `lab9.smoke` = M0 PASS, `evalset --build` | xong |
 | 1 | Commit code Lab 8 vào `src/` | xong (`73f879e`) |
 | 2 | Đọc trace C-002, C-007, C-013, C-014, swarm C-002@55 | xong (kết quả ở mục "Kết quả chạy thử") |
-| 3 | `docs/failure_taxonomy.md` | xong, **chưa commit** |
-| 4 | M1: `src/lab9/evalset.py`: gắn `FAILURE_MODES` | xong, **chưa commit**: `--build --check` = 0 problem, eval set sha `27910804735d` |
-| 5 | `docs/trace_case.md` + `src/tests/test_lab9_trace_case_c002.py` | xong, **chưa commit**: case C-002@11, regression test 2 passed |
-| **E** | **Commit M1 + M2** | **← LÀM TIẾP Ở ĐÂY (việc E)** |
-| 6 | M2: `src/lab9/stats.py` | xong, **chưa commit**: 4 hàm M2 (4/6 test `lab9_stats` xanh; 2 test bootstrap chờ M4) |
-| 7 | M2: `docs/judge_audit.md` | xong, **chưa commit**: tone dùng (κ 0.757), helpful loại (R 0.3), 10 ca audit |
-| 8–9 | M3: `src/lab9/graders.py` + `src/config/metric_spec.yaml` | chưa |
-| 10–13 | M4: bootstrap, baseline, harness map, PR | chưa |
+| 3 | `docs/failure_taxonomy.md` | xong |
+| 4 | M1: `src/lab9/evalset.py`: gắn `FAILURE_MODES` | xong: `--build --check` = 0 problem, eval set sha `27910804735d` |
+| 5 | `docs/trace_case.md` + `src/tests/test_lab9_trace_case_c002.py` | xong: case C-002@11, regression test 2 passed |
+| E | Commit M1 + M2 | xong (`269cf3e`) |
+| 6 | M2: `src/lab9/stats.py` | xong: 4 hàm M2 (4/6 test `lab9_stats` xanh; 2 test bootstrap chờ M4) |
+| 7 | M2: `docs/judge_audit.md` | xong: tone dùng (κ 0.757), helpful loại (R 0.3), 10 ca audit |
+| 8–9 | M3: `src/lab9/graders.py` + `src/config/metric_spec.yaml` | xong, **chưa commit**: 4 grader + 2 metric; detection 100%, báo nhầm 0%; 11/13 test core xanh (2 bootstrap chờ M4) |
+| **10** | **M4: `paired_bootstrap` trong `src/lab9/stats.py`** | **← LÀM TIẾP Ở ĐÂY** |
+| 11–13 | M4: baseline, harness map, PR | chưa |
 | 14 | Eval card + PRD | chưa |
 | 15–17 | M5–M7 | chưa |
 
