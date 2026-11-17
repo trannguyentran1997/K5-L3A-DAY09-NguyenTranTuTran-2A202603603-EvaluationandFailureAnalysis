@@ -6,7 +6,7 @@ File này là hướng dẫn riêng của nhóm, đi từng bước theo đề (
 
 ---
 
-## Đang ở đâu (cập nhật 17/11/2026)
+## Đang ở đâu (cập nhật 18/11/2026)
 
 | # | Bước | Trạng thái |
 |---|---|---|
@@ -17,15 +17,20 @@ File này là hướng dẫn riêng của nhóm, đi từng bước theo đề (
 | 4 | M1: `src/lab9/evalset.py`: gắn `FAILURE_MODES` | xong: `--build --check` = 0 problem, eval set sha `27910804735d` |
 | 5 | `docs/trace_case.md` + `src/tests/test_lab9_trace_case_c002.py` | xong: case C-002@11, regression test 2 passed |
 | E | Commit M1 + M2 | xong (`da47f05`) |
-| 6 | M2: `src/lab9/stats.py` | xong: 4 hàm M2 (4/6 test `lab9_stats` xanh; 2 test bootstrap chờ M4) |
+| 6 | M2: `src/lab9/stats.py` | xong: 4 hàm M2 |
 | 7 | M2: `docs/judge_audit.md` | xong: tone dùng (κ 0.757), helpful loại (R 0.3), 10 ca audit |
-| 8–9 | M3: `src/lab9/graders.py` + `src/config/metric_spec.yaml` | xong (`d969027`): 4 grader + 2 metric; detection 100%, báo nhầm 0%; 11/13 test core xanh (2 bootstrap chờ M4) |
-| **10** | **M4: `paired_bootstrap` trong `src/lab9/stats.py`** | **← LÀM TIẾP Ở ĐÂY** |
-| 11–13 | M4: baseline, harness map, PR | chưa |
-| 14 | Eval card + PRD | chưa |
-| 15–17 | M5–M7 | chưa |
+| 8–9 | M3: `src/lab9/graders.py` + `src/config/metric_spec.yaml` | xong (`d969027`): 4 grader + 2 metric; detection 100%, báo nhầm 0% |
+| 10 | M4: `paired_bootstrap` trong `src/lab9/stats.py` | xong: 13/13 test core xanh |
+| 11 | M4: baseline + gate | xong: baseline `E-swarm-20261118-2791`; `fixed` exit 0; `seeded_regression` exit 1 (pass_rate Δ −0.271, CI [−0.500, −0.057]) |
+| 12 | M4: `src/harness_map.yaml` có section `eval`, version 1.2 | xong |
+| 13 | Commit report bằng `git add -f`, push `starter/d09`, mở PR vào `main` | xong: xem link PR trong mô tả commit / tab Pull requests |
+| 14 | `docs/eval_card.md` + `docs/PRD_v1.1.md` | xong: số liệu dẫn run ID |
+| 15 | M5: `config/fm_map.yaml`, `evalset --v2 --build` | xong: 28 item, sha `f500ad9a4773`, 0 problem |
+| 16 | M5/M6: `config/metric_spec_v2.yaml` (slices, `pass_hat_5` 0.85, FM-08), `pass_at_k`/`pass_hat_k` | xong: A/A Δ = 0; 12 test advanced xanh |
+| 17 | M5/M7: `gate.slice_check` + `gate.integrity_check`, `baseline_v2.json` | xong: mutation 3/3, 0 báo nhầm; 4/4 trap bị chặn |
+| **18** | **Theo dõi job `eval-gate` và `eval-gate-v2` trên PR** | **← việc còn lại: chờ CI xanh** |
 
-Làm tiếp theo mục **"Hướng dẫn chi tiết 5 việc tiếp theo (A → E)"** ngay bên dưới. Code cho từng bước nằm ở mục **"Code mẫu từng M (đã chạy thử)"**.
+Toàn bộ M0–M7 đã cài xong. Lệnh kiểm lại từng phần nằm ở mục **"Checklist"** và **"Code mẫu từng M (đã chạy thử)"**.
 
 ---
 
