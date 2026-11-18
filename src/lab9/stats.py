@@ -67,21 +67,42 @@ def paired_bootstrap(a: Sequence[float], b: Sequence[float], *, n_resamples: int
     """a[i], b[i] = per-item mean over seeds, SAME items, SAME order.
     Return (mean(a)-mean(b), lo, hi) with scipy.stats.bootstrap(paired=True, method="percentile",
     rng=numpy.random.default_rng(rng)). If a == b everywhere return (0.0, 0.0, 0.0)."""
-    # TODO M4
-    raise NotImplementedError
+    import numpy as np
+    from scipy import stats as sps
+
+    x, y = np.asarray(a, dtype=float), np.asarray(b, dtype=float)
+    if x.shape != y.shape:
+        raise ValueError("paired bootstrap needs the same items in the same order")
+    if np.array_equal(x, y):
+        return (0.0, 0.0, 0.0)
+    res = sps.bootstrap((x, y), lambda u, v: np.mean(u) - np.mean(v), paired=True, vectorized=False,
+                        n_resamples=n_resamples, confidence_level=confidence, method="percentile",
+                        rng=np.random.default_rng(rng))
+    ci = res.confidence_interval
+    return (float(x.mean() - y.mean()), float(ci.low), float(ci.high))
+
+
+def _check_nck(n: int, c: int, k: int) -> None:
+    if not all(isinstance(v, int) and not isinstance(v, bool) for v in (n, c, k)):
+        raise ValueError("n, c, k must be integers")
+    if n < 1 or k < 1 or c < 0 or c > n or k > n:
+        raise ValueError(f"invalid (n={n}, c={c}, k={k}): need 1 <= k <= n and 0 <= c <= n")
 
 
 def pass_at_k(n: int, c: int, k: int) -> float:
     """Probability that AT LEAST ONE of k trials drawn from n (c of them passing) passes.
     Unbiased estimator (Chen et al. 2021): 1 - C(n-c, k) / C(n, k). Raise ValueError if k > n."""
-    # TODO M6
-    raise NotImplementedError
+    from math import comb
+
+    _check_nck(n, c, k)
+    return 1.0 - comb(n - c, k) / comb(n, k)
 
 
 def pass_hat_k(n: int, c: int, k: int) -> float:
     """pass^k (tau-bench, Yao et al. 2024): probability that ALL k trials drawn from n pass.
     Unbiased estimator: C(c, k) / C(n, k). Raise ValueError if k > n.
     pass^k <= pass@1 <= pass@k; a reliable agent keeps pass^k close to pass@1."""
-    # TODO M6
-    raise NotImplementedError
+    from math import comb
 
+    _check_nck(n, c, k)
+    return comb(c, k) / comb(n, k)

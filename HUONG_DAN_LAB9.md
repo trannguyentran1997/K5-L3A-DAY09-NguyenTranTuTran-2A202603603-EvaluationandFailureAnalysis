@@ -6,7 +6,7 @@ File này là hướng dẫn riêng của nhóm, đi từng bước theo đề (
 
 ---
 
-## Đang ở đâu (cập nhật 17/11/2026)
+## Đang ở đâu (cập nhật 18/11/2026)
 
 | # | Bước | Trạng thái |
 |---|---|---|
@@ -14,18 +14,26 @@ File này là hướng dẫn riêng của nhóm, đi từng bước theo đề (
 | 1 | Commit code Lab 8 vào `src/` | xong (`c18b178`) |
 | 2 | Đọc trace C-002, C-007, C-013, C-014, swarm C-002@55 | xong (kết quả ở mục "Kết quả chạy thử") |
 | 3 | `docs/failure_taxonomy.md` | xong |
-| 4 | M1: `src/lab9/evalset.py`: gắn `FAILURE_MODES` | xong: `--build --check` = 0 problem, eval set sha `27910804735d` |
+| 4 | M1: `src/lab9/evalset.py`: gắn `FAILURE_MODES` | xong: `--build --check` = 0 problem, eval set sha `685e281c2730` |
 | 5 | `docs/trace_case.md` + `src/tests/test_lab9_trace_case_c002.py` | xong: case C-002@11, regression test 2 passed |
 | E | Commit M1 + M2 | xong (`da47f05`) |
-| 6 | M2: `src/lab9/stats.py` | xong: 4 hàm M2 (4/6 test `lab9_stats` xanh; 2 test bootstrap chờ M4) |
+| 6 | M2: `src/lab9/stats.py` | xong: 4 hàm M2 |
 | 7 | M2: `docs/judge_audit.md` | xong: tone dùng (κ 0.757), helpful loại (R 0.3), 10 ca audit |
-| 8–9 | M3: `src/lab9/graders.py` + `src/config/metric_spec.yaml` | xong (`d969027`): 4 grader + 2 metric; detection 100%, báo nhầm 0%; 11/13 test core xanh (2 bootstrap chờ M4) |
-| **10** | **M4: `paired_bootstrap` trong `src/lab9/stats.py`** | **← LÀM TIẾP Ở ĐÂY** |
-| 11–13 | M4: baseline, harness map, PR | chưa |
-| 14 | Eval card + PRD | chưa |
-| 15–17 | M5–M7 | chưa |
+| 8–9 | M3: `src/lab9/graders.py` + `src/config/metric_spec.yaml` | xong (`d969027`): 4 grader + 2 metric; detection 100%, báo nhầm 0% |
+| 10 | M4: `paired_bootstrap` trong `src/lab9/stats.py` | xong: 13/13 test core xanh |
+| 11 | M4: baseline + gate | xong: baseline `E-swarm-20261118-685e`; `fixed` exit 0; `seeded_regression` exit 1 (pass_rate Δ −0.271, CI [−0.500, −0.057]) |
+| 12 | M4: `src/harness_map.yaml` có section `eval`, version 1.2 | xong |
+| 13 | Commit report bằng `git add -f`, push `starter/d09`, mở PR vào `main` | xong: xem link PR trong mô tả commit / tab Pull requests |
+| 14 | `docs/eval_card.md` + `docs/PRD_v1.1.md` | xong: số liệu dẫn run ID |
+| 15 | M5: `config/fm_map.yaml`, `evalset --v2 --build` | xong: 28 item, sha `75103cb93d69`, 0 problem |
+| 16 | M5/M6: `config/metric_spec_v2.yaml` (slices, `pass_hat_5` 0.85, FM-08), `pass_at_k`/`pass_hat_k` | xong: A/A Δ = 0; 12 test advanced xanh |
+| 17 | M5/M7: `gate.slice_check` + `gate.integrity_check`, `baseline_v2.json` | xong: mutation 3/3, 0 báo nhầm; 4/4 trap bị chặn |
+| **18** | **Theo dõi job `eval-gate` và `eval-gate-v2` trên PR** | **← việc còn lại: chờ CI xanh** |
 
-Làm tiếp theo mục **"Hướng dẫn chi tiết 5 việc tiếp theo (A → E)"** ngay bên dưới. Code cho từng bước nằm ở mục **"Code mẫu từng M (đã chạy thử)"**.
+> **Lỗi CI lần đầu (đã sửa):** máy Windows để `core.autocrlf=true` nên `eval_set_v1.jsonl` trên máy là CRLF (sha `27910804735d`), còn CI Linux checkout ra LF (sha `685e281c2730`). Gate thấy sha eval set khác baseline nên exit 1. Đã sửa bằng `.gitattributes` (`src/data/eval/*.jsonl|*.json eol=lf`) và `evalset.py` ghi `newline="
+"`, rồi sinh lại toàn bộ report. Sau khi `--build` trên Windows, luôn kiểm sha in ra phải là `685e281c2730` (v1) / `75103cb93d69` (v2).
+
+Toàn bộ M0–M7 đã cài xong. Lệnh kiểm lại từng phần nằm ở mục **"Checklist"** và **"Code mẫu từng M (đã chạy thử)"**.
 
 ---
 
@@ -150,10 +158,10 @@ Kết quả đúng:
 
 ```
 wrote data\eval\eval_set_v1.jsonl (14 items) and data\eval\labels_v1.json (14 labels)
-eval set 27910804735d: 0 problem(s)
+eval set 685e281c2730: 0 problem(s)
 ```
 
-Mã sha (`27910804735d`) có thể khác nếu bạn gắn FM khác bảng mẫu. Điều quan trọng là `0 problem(s)`.
+Mã sha (`685e281c2730`) có thể khác nếu bạn gắn FM khác bảng mẫu. Điều quan trọng là `0 problem(s)`.
 
 | Thông báo lỗi | Nghĩa | Sửa |
 |---|---|---|
